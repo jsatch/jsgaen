@@ -11,7 +11,13 @@
 
 #include <iostream>
 #include <exception>
-#include <SDL2/SDL.h>
+
+#ifdef _WIN32
+	#include <SDL.h>
+#else
+	#include <SDL2/SDL.h>
+#endif
+
 #include <sstream>
 #include "JSScreen.hpp"
 #include "JSScreenManager.hpp"

@@ -11,7 +11,13 @@
 
 #include <string>
 #include <sstream>
-#include <SDL2_image/SDL_image.h>
+
+#ifdef _WIN32
+	#include <SDL_image.h>
+#else
+	#include <SDL2_image/SDL_image.h>
+#endif
+
 #include "JSGame.hpp"
 #include "JSGameObject.hpp"
 

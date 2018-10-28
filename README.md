@@ -11,7 +11,16 @@ respectively.
 - Easy to use
 - Portable (works in OSX, Win and Linux)
 
-## Techonologies
+## Installation
+
+### Windows
+
+Set the following environment variables:
+- SDL2DIR (path to SDL2 installation folder)
+- SDL2IMAGEDIR (path to SDL2_image installation folder)
+
+
+## Technologies
 
 - Uses SDL2 for managing images and rendering issues.
 - Uses Cmake for managing of the project tasks.

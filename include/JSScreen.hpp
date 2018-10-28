@@ -9,7 +9,11 @@
 #ifndef JSScreen_hpp
 #define JSScreen_hpp
 
+#ifdef _WIN32
+#include <SDL.h>
+#else
 #include <SDL2/SDL.h>
+#endif
 #include <vector>
 #include "JSGameObject.hpp"
 

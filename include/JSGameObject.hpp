@@ -9,7 +9,13 @@
 #ifndef JSGameObject_hpp
 #define JSGameObject_hpp
 
+#ifdef _WIN32
+typedef __int32 int32_t;
+typedef unsigned __int32 u_int32_t;
+#include <SDL.h>
+#else
 #include <SDL2/SDL.h>
+#endif
 
 class JSGameObject
 {
