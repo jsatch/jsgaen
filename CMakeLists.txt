@@ -5,6 +5,8 @@ set(CMAKE_BUILD_TYPE release)
 
 if(WIN32)
 	set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "C:\\Users\\Hernan\\Development\\games\\jsgaen\\cmake")
+else()
+	set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "/Users/hernan/development/gamedev/GameEngine/Framework/cmake")
 endif()
 
 find_package(SDL2 REQUIRED)
@@ -14,10 +16,10 @@ include_directories(include ${SDL2_INCLUDE_DIR} ${SDL2_LIBS} ${SDL2_DLLS} ${SDL2
 
 file(GLOB SOURCES "src/*.cpp")
 
-add_library(jsgaen SHARED ${SOURCES})
+add_library(jsgaen STATIC ${SOURCES})
 
 target_link_libraries(jsgaen ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY})
 
 install(TARGETS jsgaen
 		RUNTIME DESTINATION build/bin
-        LIBRARY DESTINATION build/lib)
+        ARCHIVE DESTINATION build/lib)
