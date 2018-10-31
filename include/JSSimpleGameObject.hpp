@@ -9,7 +9,6 @@
 #ifndef JSSimpleGameObject_hpp
 #define JSSimpleGameObject_hpp
 
-#include <string>
 #include <sstream>
 
 #ifdef _WIN32
@@ -27,7 +26,7 @@ private:
     SDL_Rect* rect;
     SDL_Texture* texture;
 public:
-    JSSimpleGameObject(std::string path, SDL_Renderer* renderer);
+    JSSimpleGameObject(const char* path, SDL_Renderer* renderer);
     void update(u_int32_t ticks);
     void render(SDL_Renderer* renderer);
     SDL_Rect* get_rect();

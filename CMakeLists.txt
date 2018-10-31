@@ -14,10 +14,11 @@ find_package(SDL2_image REQUIRED >=2.0.0)
 
 include_directories(include ${SDL2_INCLUDE_DIR} ${SDL2_LIBS} ${SDL2_DLLS} ${SDL2_IMAGE_INCLUDE_DIR}  ${SDL2_IMAGE_LIBRARIES})
 
-file(GLOB SOURCES "src/*.cpp")
+#file(GLOB SOURCES "src/*.cpp")
 
-add_library(jsgaen STATIC ${SOURCES})
-
+# Be careful with the build order!!
+add_library(jsgaen STATIC src/JSGame.cpp src/JSGameObject.cpp src/JSScreen.cpp src/JSScreenManager.cpp src/JSSimpleGameObject.cpp src/JSAnimatedGameObject.cpp)
+ 
 target_link_libraries(jsgaen ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY})
 
 install(TARGETS jsgaen

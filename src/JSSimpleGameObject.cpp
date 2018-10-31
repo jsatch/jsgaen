@@ -9,10 +9,10 @@
 #include "JSSimpleGameObject.hpp"
 
 
-JSSimpleGameObject::JSSimpleGameObject(std::string path, SDL_Renderer* renderer) :JSGameObject()
+JSSimpleGameObject::JSSimpleGameObject(const char* path, SDL_Renderer* renderer) :JSGameObject()
 {
     
-    SDL_Surface* surface = IMG_Load(path.c_str());
+    SDL_Surface* surface = IMG_Load(path);
     if (surface == nullptr){
         std::stringstream ss;
         ss << "IMG_Load Background Error" << SDL_GetError();
