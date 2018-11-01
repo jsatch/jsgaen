@@ -27,9 +27,11 @@ JSSimpleGameObject::JSSimpleGameObject(const char* path, SDL_Renderer* renderer)
         ss << "SDL_CreateTextureFromSurface Background Error"<< SDL_GetError();
         throw JSCreationException(ss.str());
     }
-    
     rect = new SDL_Rect();
 }
+void JSSimpleGameObject::handle_input(SDL_Event* event)
+{}
+
 void JSSimpleGameObject::update(u_int32_t ticks)
 {
     rect->x++;

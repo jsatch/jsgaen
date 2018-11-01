@@ -27,6 +27,14 @@ private:
 public:
     JSScreen(SDL_Renderer* renderer);
     void add_game_object(JSGameObject* object);
+    virtual void handle_input(SDL_Event* event) const
+    {
+        for (std::vector<JSGameObject*>::iterator it = game_objects->begin(); it != game_objects->end(); ++it)
+        {
+            JSGameObject* object = *it;
+            object->handle_input(event);
+        }
+    }
     virtual void update(uint32_t ticks) const
     {
         for (std::vector<JSGameObject*>::iterator it = game_objects->begin(); it != game_objects->end(); ++it)

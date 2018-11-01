@@ -68,14 +68,14 @@ void JSGame::start()
         starting_tick = SDL_GetTicks();
         while ( SDL_PollEvent(&event) != 0)
         {
-            if ( event.type == SDL_QUIT) 
+            if ( event.type == SDL_QUIT || (
+                event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)) 
             {
+                std::cout << "Saliendo..." << std::endl;
                 running = false;
-            }else if ( event.type == SDL_KEYDOWN)
+            }else 
             {
-                if ( event.key.keysym.sym == SDLK_ESCAPE ){
-                    running = false;
-                }
+                manager->top()->handle_input(&event);
             }
         }
         

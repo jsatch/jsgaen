@@ -30,6 +30,7 @@ private:
     u_int32_t current_frame_loop;
 public:
     JSAnimatedGameObject(const char* path, SDL_Renderer* renderer);
+    void handle_input(SDL_Event* event);
     void update(u_int32_t ticks);
     void render(SDL_Renderer* renderer);
     void set_width(u_int32_t w);

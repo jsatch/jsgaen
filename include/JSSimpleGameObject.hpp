@@ -27,6 +27,7 @@ private:
     SDL_Texture* texture;
 public:
     JSSimpleGameObject(const char* path, SDL_Renderer* renderer);
+    void handle_input(SDL_Event* event);
     void update(u_int32_t ticks);
     void render(SDL_Renderer* renderer);
     SDL_Rect* get_rect();

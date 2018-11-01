@@ -26,6 +26,25 @@ JSAnimatedGameObject::JSAnimatedGameObject(const char* path, SDL_Renderer* rende
 
     animation_speed = 5; // Default
 }
+void JSAnimatedGameObject::handle_input(SDL_Event* event)
+{
+    // TO change for ECS
+    switch(event->key.keysym.sym)
+    {
+        case SDLK_UP:
+            y -= 10;
+        break;
+        case SDLK_DOWN:
+            y += 10;
+        break;
+        case SDLK_LEFT:
+            x -= 10;
+        break;
+        case SDLK_RIGHT:
+            x += 10;
+        break;
+    }
+}
 void JSAnimatedGameObject::update(u_int32_t ticks)
 {
     if (current_frame_loop >  (animation_speed / 8.0))

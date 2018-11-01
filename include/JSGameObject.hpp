@@ -22,6 +22,7 @@ class JSGameObject
     
 public:
     JSGameObject();
+    virtual void handle_input(SDL_Event* event) = 0;
     virtual void update(u_int32_t ticks) = 0;
     virtual void render(SDL_Renderer* renderer) = 0;
 };
