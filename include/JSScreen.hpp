@@ -15,44 +15,21 @@
 #include <SDL2/SDL.h>
 #endif
 #include <vector>
-#include "JSGameObject.hpp"
-
+#include "JSEcs.hpp"
 
 class JSScreen
 {
 private:
     uint32_t width, height;
     SDL_Renderer* renderer;
-    std::vector<JSGameObject*>* game_objects;
+    std::vector<JSEntity*>* game_entities;
 public:
     JSScreen(SDL_Renderer* renderer);
-    void add_game_object(JSGameObject* object);
-    virtual void handle_input(SDL_Event* event) const
-    {
-        for (std::vector<JSGameObject*>::iterator it = game_objects->begin(); it != game_objects->end(); ++it)
-        {
-            JSGameObject* object = *it;
-            object->handle_input(event);
-        }
-    }
-    virtual void update(uint32_t ticks) const
-    {
-        for (std::vector<JSGameObject*>::iterator it = game_objects->begin(); it != game_objects->end(); ++it)
-        {
-            JSGameObject* object = *it;
-            object->update(ticks);
-        }
-    };
-    virtual void render() const
-    {
-        SDL_RenderClear(renderer);
-        for (std::vector<JSGameObject*>::iterator it = game_objects->begin(); it != game_objects->end(); ++it)
-        {
-            JSGameObject* object = *it;
-            object->render(renderer);
-        }
-        SDL_RenderPresent(renderer);
-    };
+
+    void add_game_entity(JSEntity* entity);
+    virtual void handle_input(SDL_Event* event);
+    virtual void update(uint32_t delta);
+    virtual void render();
     ~JSScreen();
 };
 

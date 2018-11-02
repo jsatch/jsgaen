@@ -11,18 +11,42 @@
 JSScreen::JSScreen( SDL_Renderer* renderer)
 {
     this->renderer = renderer;
-    game_objects = new std::vector<JSGameObject*>();
-}
-void JSScreen::add_game_object(JSGameObject* object)
-{
-    game_objects->push_back(object);
+    game_entities = new std::vector<JSEntity*>();
 }
 
+// ** //
+void JSScreen::add_game_entity(JSEntity* entity)
+{
+    game_entities->push_back(entity);
+}
+
+void JSScreen::handle_input(SDL_Event* event)
+{
+    for (JSEntity* en : *game_entities)
+    {
+        en->handle_input(event);
+    }
+}
+void JSScreen::update(uint32_t delta)
+{
+    for (JSEntity* en : *game_entities)
+    {
+        en->update(delta);
+    }
+}
+void JSScreen::render()
+{
+    SDL_RenderClear(renderer);
+    for (JSEntity* en : *game_entities)
+    {
+        en->render();
+    }
+    SDL_RenderPresent(renderer);
+}
 JSScreen::~JSScreen()
 {
-    for (std::vector<JSGameObject*>::iterator it = game_objects->begin(); it != game_objects->end(); ++it)
+    for (JSEntity* en : *game_entities)
     {
-        JSGameObject* object = *it;
-        free(object);
+        free(en);
     }
 }

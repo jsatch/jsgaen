@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8.9)
 
 project(js_framework)
 set(CMAKE_BUILD_TYPE release) 
+set(CMAKE_CXX_STANDARD 11)
 
 if(WIN32)
 	set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "C:\\Users\\Hernan\\Development\\games\\jsgaen\\cmake")
@@ -17,7 +18,12 @@ include_directories(include ${SDL2_INCLUDE_DIR} ${SDL2_LIBS} ${SDL2_DLLS} ${SDL2
 #file(GLOB SOURCES "src/*.cpp")
 
 # Be careful with the build order!!
-add_library(jsgaen STATIC src/JSGame.cpp src/JSGameObject.cpp src/JSScreen.cpp src/JSScreenManager.cpp src/JSSimpleGameObject.cpp src/JSAnimatedGameObject.cpp)
+add_library(jsgaen STATIC  
+	src/JSGame.cpp 
+	src/JSScreen.cpp 
+	src/JSScreenManager.cpp 
+	src/JSEcs.cpp
+	src/JSTextureManager.cpp)
  
 target_link_libraries(jsgaen ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY})
 

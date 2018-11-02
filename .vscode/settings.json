@@ -11,6 +11,8 @@
         "type_traits": "cpp",
         "typeinfo": "cpp",
         "algorithm": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "sstream": "cpp",
+        "utility": "cpp"
     }
 }
