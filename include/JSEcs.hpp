@@ -19,12 +19,16 @@ class JSComponent
 protected:
     JSEntity* entity;
     ComponentID id;
+    bool active = true;
 public:
     JSComponent();
-    JSComponent(JSEntity* entity);
     ComponentID get_id();
+    virtual void handle_input(SDL_Event* event);
     virtual void update(u_int32_t delta);
     virtual void render();
+    void set_entity(JSEntity*);
+    void set_active(bool);
+    bool get_active();
     ComponentID getComponentID()
     {
         static ComponentID last_id = 0;
