@@ -13,6 +13,7 @@
         "algorithm": "cpp",
         "stack": "cpp",
         "sstream": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "ostream": "cpp"
     }
 }

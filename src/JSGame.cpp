@@ -33,7 +33,7 @@ JSGame::JSGame()
         std::cout << "Error SDL_Init: " << SDL_GetError() << std::endl;
     }
     
-    window = SDL_CreateWindow("Game Title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_FULLSCREEN);
+    window = SDL_CreateWindow("Game Title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
     if (window == nullptr)
     {
         std::cout << "Error SDL_CreateWindow: " << SDL_GetError() << std::endl;
@@ -66,7 +66,7 @@ void JSGame::start()
     while( running ) 
     {
         starting_tick = SDL_GetTicks();
-        while ( SDL_PollEvent(&event) != 0)
+        if ( SDL_PollEvent(&event) != 0)
         {
             if ( event.type == SDL_QUIT || (
                 event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)) 
