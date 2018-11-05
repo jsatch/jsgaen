@@ -43,8 +43,10 @@ private:
     SDL_Window* window;
     SDL_Renderer* renderer;
     JSScreenManager* manager;
+    uint32_t window_mode; // SDL_WINDOW_SHOWN o SDL_WINDOW_FULLSCREEN
+    uint32_t width, height;
 public:
-    JSGame();
+    JSGame(uint32_t, uint32_t, uint32_t);
     void start();
     void set_start_controller(JSScreen* screen);
     SDL_Renderer* get_renderer();

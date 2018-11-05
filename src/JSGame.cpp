@@ -25,15 +25,19 @@ void calculate_frame_rate(Uint32 starting_tick)
     }
 }
 
-JSGame::JSGame()
+JSGame::JSGame(uint32_t mode, uint32_t w, uint32_t h)
 {
+    window_mode = mode;
+    width = w;
+    height = h;
+
     // Initializing SDL objects
     if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
     {
         std::cout << "Error SDL_Init: " << SDL_GetError() << std::endl;
     }
     
-    window = SDL_CreateWindow("Game Title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+    window = SDL_CreateWindow("Game Title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, window_mode);
     if (window == nullptr)
     {
         std::cout << "Error SDL_CreateWindow: " << SDL_GetError() << std::endl;
