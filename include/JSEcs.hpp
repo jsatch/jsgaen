@@ -1,37 +1,56 @@
 #ifndef JSEcs_hpp
 #define JSEcs_hpp
 
-#include <map>
+#include <vector>
+#include <bitset>
+#include <array>
 #ifdef _WIN32
 #include <SDL.h>
 #else
 #include <SDL2/SDL.h>
 #endif
 
-using ComponentID = std::size_t;
-
-
 class JSComponent;
 class JSEntity;
+
+using ComponentTypeID = std::size_t;
+
+inline ComponentTypeID getComponentTypeID()
+{
+    static ComponentTypeID last_id = 0;
+    return last_id++;
+}
+
+template <typename T> inline ComponentTypeID getComponentTypeID() noexcept
+{
+    static ComponentTypeID type_id = getComponentTypeID();
+    return type_id;
+}
+
+constexpr std::size_t max_components = 32;
+
+using ComponentBitSet = std::bitset<max_components>;
+using ComponentArray = std::array<JSComponent*, max_components>;
+
 
 class JSComponent
 {
 protected:
     JSEntity* entity;
-    ComponentID id;
+    ComponentTypeID id;
     bool active = true;
 public:
     JSComponent();
-    ComponentID get_id();
+    ComponentTypeID get_id();
     virtual void handle_input(SDL_Event* event);
     virtual void update(u_int32_t delta);
     virtual void render();
     void set_entity(JSEntity*);
     void set_active(bool);
     bool get_active();
-    ComponentID getComponentID()
+    ComponentTypeID getComponentID()
     {
-        static ComponentID last_id = 0;
+        static ComponentTypeID last_id = 0;
         return last_id++;
     }
     ~JSComponent();
@@ -40,11 +59,15 @@ public:
 class JSEntity
 {
 private:
-    std::map<ComponentID, JSComponent*>* components;
+    //std::map<ComponentID, JSComponent*>* components;
+    std::vector<std::unique_ptr<JSComponent>> components;
+    ComponentArray cArray;
+    ComponentBitSet cBitSet;
 public:
     JSEntity();
-    JSComponent* get_component(ComponentID id);
-    void add_component(ComponentID id, JSComponent* component);
+    template<typename T> bool has_component();
+    template<typename T> T& get_component();
+    template <typename T, typename... TArgs> T& add_component(TArgs&&... mArgs);
     virtual void handle_input(SDL_Event* event);
     virtual void update(u_int32_t delta);
     virtual void render();

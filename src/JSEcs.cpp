@@ -2,7 +2,7 @@
 
 JSComponent::JSComponent()
 {}
-ComponentID JSComponent::get_id()
+ComponentTypeID JSComponent::get_id()
 {
     return id;
 }
@@ -30,41 +30,49 @@ JSComponent::~JSComponent()
 // -------------------------------------------------------------
 
 JSEntity::JSEntity()
+{}
+template<typename T> bool JSEntity::has_component()
 {
-    components = new std::map<ComponentID, JSComponent*>();
+    return cBitSet[getComponentTypeID<T>];
 }
-JSComponent *JSEntity::get_component(ComponentID id)
+template<typename T> T& JSEntity::get_component()
 {
-    return components->at(id);
+    auto ptr(cArray[getComponentTypeID<T>()]);
+    return *static_cast<T*>(ptr);
 }
-void JSEntity::add_component(ComponentID id, JSComponent *component)
+template <typename T, typename... TArgs> T& JSEntity::add_component(TArgs&&... mArgs)
 {
-    (*components)[id] = component;
-    component->set_entity(this);
+    T* c(new T(std::forward<TArgs>(mArgs)...));
+    c->entity = this;
+    std::unique_ptr<JSComponent> uPtr {c};
+    components.emplace_back(std::move(uPtr));
+
+    cArray[getComponentTypeID<T>()] = c;
+    cBitSet[getComponentTypeID<T>()] = true;
+
+    return *c;
 }
 void JSEntity::handle_input(SDL_Event* event)
 {
-    for (std::pair<ComponentID, JSComponent*> c : *components)
+    for (JSComponent* c : cArray)
     {
-        if (c.second->get_active()) c.second->handle_input(event);
+        if (c->get_active()) c->handle_input(event);
     }
 }
 void JSEntity::update(u_int32_t delta)
 {
-    for (std::pair<ComponentID, JSComponent*> c : *components)
+    for (JSComponent* c : cArray)
     {
-        if (c.second->get_active()) c.second->update(delta);
+        if (c->get_active()) c->update(delta);
     }
 
 }
 void JSEntity::render()
 {
-    for (std::pair<ComponentID, JSComponent*> c : *components)
+    for (JSComponent* c : cArray)
     {
-        if (c.second->get_active()) c.second->render();
+        if (c->get_active()) c->render();
     }
 }
 JSEntity::~JSEntity()
-{
-    free(components);
-}
+{}
