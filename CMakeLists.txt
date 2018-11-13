@@ -1,11 +1,12 @@
 cmake_minimum_required(VERSION 2.8.9)
 
 project(js_framework)
-set(CMAKE_BUILD_TYPE release) 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_BUILD_TYPE debug) 
+set(CMAKE_CXX_STANDARD 14)
 
 if(WIN32)
-	set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "C:\\Users\\Hernan\\Development\\games\\jsgaen\\cmake")
+	set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "C:/Users/Hernan/Development/games/jsgaen/cmake")
+	set(PROJECT_PATH "C:/Users/Hernan/Development/games/jsgaen") 
 else()
 	set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "/Users/hernan/development/gamedev/GameEngine/Framework/cmake")
 endif()
@@ -27,6 +28,10 @@ add_library(jsgaen STATIC
  
 target_link_libraries(jsgaen ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY})
 
-install(TARGETS jsgaen
-		RUNTIME DESTINATION build/bin
-        ARCHIVE DESTINATION build/lib)
+#if(WIN32)
+#	install(TARGETS jsgaen
+#        ARCHIVE DESTINATION ${PROJECT_PATH}/build/lib)
+#else()
+#	install(TARGETS jsgaen
+#		ARCHIVE DESTINATION build/lib)
+#endif()

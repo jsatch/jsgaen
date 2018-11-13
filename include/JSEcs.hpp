@@ -24,7 +24,7 @@ public:
     JSComponent();
     ComponentID get_id();
     virtual void handle_input(SDL_Event* event);
-    virtual void update(u_int32_t delta);
+    virtual void update(uint32_t delta);
     virtual void render();
     void set_entity(JSEntity*);
     void set_active(bool);
@@ -46,7 +46,7 @@ public:
     JSComponent* get_component(ComponentID id);
     void add_component(ComponentID id, JSComponent* component);
     virtual void handle_input(SDL_Event* event);
-    virtual void update(u_int32_t delta);
+    virtual void update(uint32_t delta);
     virtual void render();
     ~JSEntity();
 };

@@ -5,6 +5,11 @@
       "taskName": "task-CMakeLists",
       "appliesTo": "CMakeLists.txt",
       "type": "launch"
+    },
+    {
+      "taskName": "task-CMakeLists",
+      "appliesTo": "CMakeLists.txt",
+      "type": "launch"
     }
   ]
 }

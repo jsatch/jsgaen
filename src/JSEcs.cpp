@@ -8,7 +8,7 @@ ComponentID JSComponent::get_id()
 }
 void JSComponent::handle_input(SDL_Event* event)
 {}
-void JSComponent::update(u_int32_t delta)
+void JSComponent::update(uint32_t delta)
 {}
 void JSComponent::render()
 {}
@@ -49,7 +49,7 @@ void JSEntity::handle_input(SDL_Event* event)
         if (c.second->get_active()) c.second->handle_input(event);
     }
 }
-void JSEntity::update(u_int32_t delta)
+void JSEntity::update(uint32_t delta)
 {
     for (std::pair<ComponentID, JSComponent*> c : *components)
     {

@@ -2,9 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\cmake",
-    "\\cmake_win",
-    "\\extern"
+    "\\include",
+    "\\src"
   ],
-  "SelectedNode": "\\CMakeLists.txt",
+  "SelectedNode": "\\CMakeSettings.json",
   "PreviewInSolutionExplorer": false
 }
